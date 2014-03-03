@@ -10,6 +10,9 @@ mkdir -p $DATADIR
 mkdir -p $SHOTSDIR
 mkdir -p $LOGDIR
 
+# copy files
+cp *.sh $BINDIR
+
 # fix permissions
-chmod +x *.sh
+chmod +x ${BINDIR}/*.sh
 chown -R pi $DIR

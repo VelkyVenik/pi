@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $(dirname $(readlink -f $0))
+
 . config.sh
 . utils.sh
 
@@ -57,6 +59,7 @@ function check_remote_status()
 STATUS=$1
 if [ -z "$STATUS" ]; then
 	echo "missing status parametr [on|off]"
+	script_end
 	exit -1
 fi
 
