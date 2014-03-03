@@ -7,6 +7,8 @@
 mkdir -p $DIR
 mkdir -p $BINDIR
 mkdir -p $DATADIR
+mkdir -p $SHOTSDIR
+mkdir -p $LOGDIR
 
 # fix permissions
 chmod +x *.sh
