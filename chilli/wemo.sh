@@ -14,7 +14,7 @@ function turn_on ()
 	if [ -e "$F" ]; then
 		warn "device is already on"
 	fi
-	#wemo $WEMO_NAME on
+	wemo switch $WEMO_NAME on
 	touch $F
 }
 
@@ -24,14 +24,28 @@ function turn_off()
 	if [ ! -e "$F" ]; then
 		warn "device is already off"
 	fi
-	#wemo $WEMO_NAME off
+	wemo switch $WEMO_NAME off
 	rm -f $F
 }
 
 function check_status()
 {
-	debug "Check wemo $WEMO_NAME status"
+	debug "Check wemo $WEMO_NAME status via lock file"
 	if [ -e "$F" ]; then
+		debug "status: on"
+		RETVAL=1
+	else
+		debug "status: off"
+		RETVAL=0
+	fi
+}
+
+function check_remote_status()
+{
+	debug "Check wemo $WEMO_NAME status remotely"
+	S=$(wemo status | grep ${WEMO_NAME} | sed -e "s/.*: .* //")
+	debug "Remote response: $S"
+	if [ "$S" -eq 1 ]; then
 		debug "status: on"
 		RETVAL=1
 	else
@@ -52,6 +66,8 @@ elif [ "$STATUS" = "off" ]; then
 	turn_off
 elif [ "$STATUS" = "status" ]; then
 	check_status
+elif [ "$STATUS" = "remote_status" ]; then
+	check_remote_status
 else
 	echo "unknown parametr: $STATUS"
 	RETVAL=-1
