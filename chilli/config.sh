@@ -15,3 +15,8 @@ WEMO_NAME=chilli
 # Camera configuration
 CAMERA_SHOT_URL="http://192.168.88.7:8080/?action=snapshot"
 CAMERA_STREAM_URL=""
+
+
+if [ -e "config-local.sh" ]; then
+	. config-local.sh
+fi
