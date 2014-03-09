@@ -9,12 +9,14 @@ script_start $*
 
 FILE=$(date +%Y%m%d%H%M).jpg
 
-./wemo.sh remote_status
-RETVAL=$?
-if [ "$RETVAL" -ne 1 ]; then
-	debug "Light is off, no camera shots..."
-	script_end
-	exit -1
+if [ "$CAMERA_CHECK_WEMO" -eq 1 ]; then
+	./wemo.sh remote_status
+	RETVAL=$?
+	if [ "$RETVAL" -ne 1 ]; then
+		debug "Light is off, no camera shots..."
+		script_end
+		exit -1
+	fi
 fi
 
 debug "Taking camera shot: $FILE"
