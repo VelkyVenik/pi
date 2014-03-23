@@ -15,4 +15,3 @@ cp *.sh $BINDIR
 
 # fix permissions
 chmod +x ${BINDIR}/*.sh
-chown -R pi $DIR
