@@ -45,7 +45,7 @@ function check_status()
 function check_remote_status()
 {
 	debug "Check wemo $WEMO_NAME status remotely"
-	S=$(wemo status | grep ${WEMO_NAME} | sed -e "s/.*: .* //")
+	S=$(wemo -f status | grep ${WEMO_NAME} | sed -e "s/.*: .* //")
 	debug "Remote response: $S"
 	if [ "$S" -eq 1 ]; then
 		debug "status: on"

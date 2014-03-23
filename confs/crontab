@@ -12,12 +12,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 25 6	* * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
 47 6	* * 7	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
 52 6	1 * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
-#
 
-# Camera shots
-#0,30 *	* * *	root	/usr/local/bin/shot.sh
-0,30 *	* * *	root	/opt/chilli/bin/camera-shot.sh
 
-# Make a video from all shots
-#0 2	* * *	root	/mnt/home/Dropbox/Photos/Chilli/pi_make_video.sh
+# camera snapshot
+0,30 * * * *	root	/opt/chilli/bin/camera-shot.sh
 
