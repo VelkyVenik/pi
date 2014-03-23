@@ -8,6 +8,7 @@ cd $(dirname $(readlink -f $0))
 script_start $*
 
 FILE=$(date +%Y%m%d%H%M).jpg
+D=$(date +%Y-%m-%d)
 
 if [ "$CAMERA_CHECK_WEMO" -eq 1 ]; then
 	./wemo.sh remote_status
@@ -20,7 +21,9 @@ if [ "$CAMERA_CHECK_WEMO" -eq 1 ]; then
 fi
 
 debug "Taking camera shot: $FILE"
-wget $CAMERA_SHOT_URL -O - -a ${LOGDIR}/camera-shot.log | convert - -transpose -transpose -rotate 180 ${SHOTSDIR}/${FILE}
+wget $CAMERA_SHOT_URL -O - -a ${LOGDIR}/camera-shot.log | \
+	convert - -transpose -transpose -rotate 180 - | \
+	convert - -pointsize 24 -fill yellow -draw "text 5,520 '$D'" ${SHOTSDIR}/${FILE}
 
 debug "Copying file to remote location"
 cp ${SHOTSDIR}/${FILE} /mnt/home/Dropbox/Photos/Chilli
