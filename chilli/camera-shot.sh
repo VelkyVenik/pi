@@ -23,7 +23,7 @@ fi
 debug "Taking camera shot: $FILE"
 wget $CAMERA_SHOT_URL -O - -a ${LOGDIR}/camera-shot.log | \
 	convert - -transpose -transpose -rotate 180 - | \
-	convert - -pointsize 24 -fill yellow -draw "text 5,520 '$D'" ${SHOTSDIR}/${FILE}
+	convert - -pointsize 24 -fill red -draw "text 5,520 '$D'" ${SHOTSDIR}/${FILE}
 
 debug "Copying file to remote location"
 cp ${SHOTSDIR}/${FILE} /mnt/home/Dropbox/Photos/Chilli
