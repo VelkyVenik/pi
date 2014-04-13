@@ -14,6 +14,8 @@ WEMO_NAME=chilli
 
 # Camera configuration
 CAMERA_CHECK_WEMO=1
+CAMERA_SHOT_WEB=0
+CAMERA_SHOT_PI=1
 CAMERA_SHOT_URL="http://192.168.88.7:8080/?action=snapshot"
 CAMERA_STREAM_URL=""
 

@@ -20,10 +20,18 @@ if [ "$CAMERA_CHECK_WEMO" -eq 1 ]; then
 	fi
 fi
 
-debug "Taking camera shot: $FILE"
-wget $CAMERA_SHOT_URL -O - -a ${LOGDIR}/camera-shot.log | \
-	convert - -transpose -transpose -rotate 180 - | \
-	convert - -pointsize 24 -fill red -draw "text 5,520 '$D'" ${SHOTSDIR}/${FILE}
+if [ "$CAMERA_SHOT_WEB" -eq 1 ]; then
+	debug "Taking camera shot from web: $FILE"
+	wget $CAMERA_SHOT_URL -O - -a ${LOGDIR}/camera-shot.log | \
+		convert - -transpose -transpose -rotate 180 - | \
+		convert - -pointsize 24 -fill red -draw "text 5,520 '$D'" ${SHOTSDIR}/${FILE}
+fi
+
+if [ "$CAMERA_SHOT_PI" -eq 1 ]; then
+	debug "Taking camera shot by raspistill: $FILE"
+	/opt/vc/bin/raspistill -n -rot 180 -t 1 -q 75 -o - | \
+  	convert - -pointsize 32 -fill red -draw "text 10,1900 '$D'" ${SHOTSDIR}/${FILE}
+fi
 
 debug "Copying file to remote location"
 cp ${SHOTSDIR}/${FILE} /mnt/home/Dropbox/Photos/Chilli
