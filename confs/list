@@ -1,2 +1,6 @@
-~/.vimrc									vimrc
+/etc/vimrc									vimrc
+/etc/tmpfiles.d/ds18b20.conf tmpfiles.conf
+/etc/modules-load.d/ds18b20.conf	modules.conf
+/etc/cron.d/ds182b20 cron.conf
+
 
